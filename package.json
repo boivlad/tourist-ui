@@ -1,7 +1,6 @@
 {
   "name": "boilerplate-react",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "antd": "^4.2.0",
     "axios": "^0.19.2",
