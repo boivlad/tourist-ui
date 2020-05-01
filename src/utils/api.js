@@ -1,29 +1,33 @@
 import axios from 'axios';
 
-const host = "";
+const host = "http://localhost:8080/api/v1";
 
 const urls = {
   login: `${host}/auth`,
   logout: `${host}/logout`,
+  hotels: `${host}/hotels`,
 };
 
-let cache = {};
+// let cache = {};
 
-const callThenWait = (fn, time) => {
-  let timer;
-  return async (data) => {
-    if (!timer) {
-      timer = setTimeout(() => {
-        clearTimeout(timer);
-        timer = undefined;
-      }, time);
-      cache = await fn(data);
-    }
-    return cache;
-  }
-};
+// const callThenWait = (fn, time) => {
+//   let timer;
+//   return async (data) => {
+//     if (!timer) {
+//       timer = setTimeout(() => {
+//         clearTimeout(timer);
+//         timer = undefined;
+//       }, time);
+//       cache = await fn(data);
+//     }
+//     return cache;
+//   }
+// };
 
-const serverRequest = config => async ({ data = false, params = false } = { data: false, params: false }) => {
+const serverRequest = config => async ({ data = false, params = false } = {
+  data: false,
+  params: false
+}) => {
   try {
     const r = await axios({
       ...config,
@@ -31,16 +35,29 @@ const serverRequest = config => async ({ data = false, params = false } = { data
       params: params || undefined,
     });
     return r.data;
-  } catch (e) {
+  }
+  catch (e) {
     return e.response.data;
   }
 };
-
-const auth = {
-  login: serverRequest({
-    method: 'POST',
-    url: urls.login,
+const serviceInfo = {
+  getHotels: serverRequest({
+    method: 'GET',
+    url: urls.hotels
   }),
+}
+const auth = {
+  login: (name, password) => {
+    const sendRequest = serverRequest({
+      method: 'POST',
+      url: urls.login,
+    });
+    const data = {
+      login: name,
+      password,
+    };
+    return sendRequest({ data })
+  },
   logout: serverRequest({
     method: 'POST',
     url: urls.logout
@@ -50,4 +67,5 @@ const auth = {
 
 export default {
   ...auth,
+  ...serviceInfo,
 }

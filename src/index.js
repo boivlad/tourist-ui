@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
+import jwt from 'jsonwebtoken';
+import AppRouter from './routes';
 import 'antd/dist/antd.css';
 import './index.css';
-import AppRouter from './routes';
 import store, { actions } from "./state-management";
 import * as serviceWorker from './serviceWorker';
-// store.dispatch(actions.login(1))
+
+const token = localStorage.getItem('token');
+if (token) {
+  const { userId } = jwt.decode(token);
+  if (userId) {
+    store.dispatch(actions.login(userId));
+  }
+}
 ReactDOM.render(
   <Provider store={store}>
     <AppRouter/>

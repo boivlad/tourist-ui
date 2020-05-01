@@ -2,10 +2,14 @@ import { LOGIN, LOGOUT } from '../types';
 
 const initialState = {
   isLoggedIn: false,
+  user: {}
 };
 
-const handleLogin = () => ({
-  isLoggedIn: true
+const handleLogin = (username) => ({
+  isLoggedIn: true,
+  user: {
+    name: username,
+  }
 });
 
 const handleLogout = () => initialState;
@@ -17,5 +21,5 @@ const handlers = {
 
 export default (state = initialState, action) => {
   const handler = handlers[action.type];
-  return handler ? handler() : state;
+  return handler ? handler(action.payload) : state;
 };

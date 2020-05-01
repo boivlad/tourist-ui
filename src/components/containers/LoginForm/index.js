@@ -1,16 +1,31 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Form, Input, Button, Checkbox } from 'antd';
 import './styles.css';
 
 
+
 class LoginForm extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isLoading: false,
+    };
+    this.onFinish = this.onFinish.bind(this);
   }
 
+  toggleLoading = () => {
+    this.setState(prevState => ({
+      isLoading: !prevState.isLoading,
+    }))
+  };
+
   onFinish(values) {
-    console.log('Received values of form: ', values);
+    this.toggleLoading();
+    console.log(this.props);
+    this.props.onFinish(values);
+    this.toggleLoading();
   };
 
   render() {
@@ -22,7 +37,7 @@ class LoginForm extends Component {
       >
         <label className='loginLabel'>Sign In</label>
         <Form.Item
-          name="username"
+          name="name"
           rules={[
             {
               required: true,
@@ -57,4 +72,5 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm;
+export default connect(({ auth }) => ({ isLoggedIn: auth.isLoggedIn })
+)(LoginForm);
