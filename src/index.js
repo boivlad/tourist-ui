@@ -4,12 +4,12 @@ import { Provider } from "react-redux";
 import 'antd/dist/antd.css';
 import './index.css';
 import AppRouter from './routes';
-import store from "./state-management";
+import store, { actions } from "./state-management";
 import * as serviceWorker from './serviceWorker';
-
+// store.dispatch(actions.login(1))
 ReactDOM.render(
   <Provider store={store}>
-    <AppRouter />
+    <AppRouter/>
   </Provider>,
   document.getElementById('root'),
 );

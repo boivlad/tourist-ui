@@ -1,9 +1,13 @@
 import React from 'react';
+import { LoginForm } from '../../components/containers/';
+import './styles.css';
 
-const Login = () => (
-  <div>
-    Login
-  </div>
-);
+const Login = () => {
+  return (
+    <div className="login">
+      <LoginForm/>
+    </div>
+  );
+};
 
 export default Login;
