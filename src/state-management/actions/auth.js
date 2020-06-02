@@ -35,14 +35,20 @@ export const registrationManagerRequest = (userData) => async(dispatch) => {
 };
 
 export const loginRequest = (user) => async(dispatch) => {
-  const response = await api.login(user.name, user.enPassword);
-  if (!response.data.token) {
+  try {
+    const response = await api.login(user.name, user.enPassword);
+    if (response.status === 200 && response.data.token) {
+      message.success('Welcome');
+      functions.setAuthorizationToken(response.data.token);
+      localStorage.setItem('token', response.data.token);
+      dispatch(login(user.name));
+      return true;
+    }
     message.error(response.data.message);
-    return;
+  } catch (e) {
+    message.error(e);
   }
-  functions.setAuthorizationToken(response.data.token);
-  localStorage.setItem('token', response.data.token);
-  dispatch(login(user.name));
+  return false;
 };
 export const logout = () => async(dispatch) => {
   await api.logout();

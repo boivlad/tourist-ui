@@ -17,8 +17,9 @@ class Login extends Component {
 
   async loginRequest({ name, password }) {
     const enPassword = encryptData(password);
-    await this.props.loginRequest({ name, enPassword });
-    this.replace();
+    if (await this.props.loginRequest({ name, enPassword })) {
+      this.replace();
+    }
   }
 
   componentDidMount() {

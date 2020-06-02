@@ -37,7 +37,7 @@ const serverRequest = (config) => async({ data = false, params = false } = {
       params: params || undefined,
     });
   } catch (e) {
-    return e.response.data;
+    return e.response;
   }
 };
 const serviceInfo = {
