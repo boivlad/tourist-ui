@@ -1,10 +1,12 @@
 import axios from 'axios';
 
-const host = "http://localhost:8080/api/v1";
+const host = 'http://localhost:8080/api/v1';
 
 const urls = {
   login: `${host}/auth`,
-  logout: `${host}/logout`,
+  registration: `${host}/user`,
+  registrationManager: `${host}/admin`,
+  logout: `${host}/user`,
   hotels: `${host}/hotels`,
 };
 
@@ -24,28 +26,26 @@ const urls = {
 //   }
 // };
 
-const serverRequest = config => async ({ data = false, params = false } = {
+const serverRequest = (config) => async({ data = false, params = false } = {
   data: false,
-  params: false
+  params: false,
 }) => {
   try {
-    const r = await axios({
+    return await axios({
       ...config,
       data: data || undefined,
       params: params || undefined,
     });
-    return r.data;
-  }
-  catch (e) {
+  } catch (e) {
     return e.response.data;
   }
 };
 const serviceInfo = {
   getHotels: serverRequest({
     method: 'GET',
-    url: urls.hotels
+    url: urls.hotels,
   }),
-}
+};
 const auth = {
   login: (name, password) => {
     const sendRequest = serverRequest({
@@ -53,14 +53,28 @@ const auth = {
       url: urls.login,
     });
     const data = {
-      login: name,
+      userName: name,
       password,
     };
-    return sendRequest({ data })
+    return sendRequest({ data });
+  },
+  registration: (data) => {
+    const sendRequest = serverRequest({
+      method: 'POST',
+      url: urls.registration,
+    });
+    return sendRequest({ data });
+  },
+  registrationManager: (data) => {
+    const sendRequest = serverRequest({
+      method: 'POST',
+      url: urls.registrationManager,
+    });
+    return sendRequest({ data });
   },
   logout: serverRequest({
-    method: 'POST',
-    url: urls.logout
+    method: 'delete',
+    url: urls.logout,
   }),
 };
 
@@ -68,4 +82,4 @@ const auth = {
 export default {
   ...auth,
   ...serviceInfo,
-}
+};

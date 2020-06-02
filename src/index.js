@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from "react-redux";
+import { Provider } from 'react-redux';
 import jwt from 'jsonwebtoken';
 import AppRouter from './routes';
 import 'antd/dist/antd.css';
 import './index.css';
-import store, { actions } from "./state-management";
+import store, { actions } from './state-management';
 import * as serviceWorker from './serviceWorker';
 
 const token = localStorage.getItem('token');

@@ -1,9 +1,9 @@
-.loginForm {
+.registrationForm {
   max-width: 500px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
-.loginForm .ant-form-item-control-input {
+.registrationForm .ant-form-item-control-input {
   width: 260px;
 }

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Button, Form, Input } from 'antd';
 import './styles.css';
-
 
 
 class LoginForm extends Component {
@@ -15,27 +14,26 @@ class LoginForm extends Component {
     this.onFinish = this.onFinish.bind(this);
   }
 
-  toggleLoading = () => {
-    this.setState(prevState => ({
+  toggleLoading() {
+    this.setState((prevState) => ({
       isLoading: !prevState.isLoading,
-    }))
-  };
+    }));
+  }
 
   onFinish(values) {
     this.toggleLoading();
-    console.log(this.props);
     this.props.onFinish(values);
     this.toggleLoading();
-  };
+  }
 
   render() {
     return (
       <Form
-        name="normal_login"
-        className="login-form"
+        name="loginForm"
+        className="loginForm"
         onFinish={this.onFinish}
       >
-        <label className='loginLabel'>Sign In</label>
+        <label className='formLabel'>Login</label>
         <Form.Item
           name="name"
           rules={[
@@ -54,23 +52,14 @@ class LoginForm extends Component {
           <Input.Password placeholder="Password"/>
         </Form.Item>
         <Form.Item>
-          <Form.Item name="remember" valuePropName="checked" noStyle>
-            <Checkbox>Remember me</Checkbox>
-            <a className="login-form-forgot" href="">
-              Forgot password
-            </a>
-          </Form.Item>
-        </Form.Item>
-        <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-form-button">
+          <Button type="primary" htmlType="submit" className="formButton">
             Log in
           </Button>
-          Or <Link to={"registration"}>register now!</Link>
+          Or <Link to={'registration'}>register now!</Link>
         </Form.Item>
       </Form>
     );
   }
 }
 
-export default connect(({ auth }) => ({ isLoggedIn: auth.isLoggedIn })
-)(LoginForm);
+export default connect(({ auth }) => ({ isLoggedIn: auth.isLoggedIn }))(LoginForm);

@@ -9,5 +9,5 @@ export { actions };
 
 export default createStore(
   rootReducer,
-  applyMiddleware(thunk)
+  applyMiddleware(thunk),
 );

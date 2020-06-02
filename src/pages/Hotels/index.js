@@ -3,12 +3,7 @@ import { connect } from 'react-redux';
 import { HotelsList } from '../../components/containers';
 
 class Hotels extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
-
     return (
       <div>
         <HotelsList/>
@@ -17,5 +12,4 @@ class Hotels extends Component {
   }
 }
 
-export default connect(({ auth }) => ({ isLoggedIn: auth.isLoggedIn })
-)(Hotels);
+export default connect(({ auth }) => ({ isLoggedIn: auth.isLoggedIn }))(Hotels);

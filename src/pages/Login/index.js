@@ -1,20 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actions } from '../../state-management';
-import { LoginForm } from '../../components/containers/';
+import { LoginForm } from '../../components/containers';
 import { encryptData } from '../../utils/functions/auth';
 import './styles.css';
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.loginRequest = this.loginRequest.bind(this);
+  }
+
   replace() {
     this.props.history.replace('/');
-  };
+  }
 
-  loginRequest = async ({ name, password }) => {
+  async loginRequest({ name, password }) {
     const enPassword = encryptData(password);
     await this.props.loginRequest({ name, enPassword });
     this.replace();
-  };
+  }
 
   componentDidMount() {
     if (this.props.isLoggedIn) {
@@ -24,7 +29,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="login">
+      <div className="formPosition">
         <LoginForm onFinish={this.loginRequest}/>
       </div>
     );
@@ -32,5 +37,4 @@ class Login extends Component {
 }
 
 export default connect(({ auth }) => ({ isLoggedIn: auth.isLoggedIn }),
-  { loginRequest: actions.loginRequest }
-)(Login);
+  { loginRequest: actions.loginRequest })(Login);
