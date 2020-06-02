@@ -1,15 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Col, Layout, Row } from 'antd';
+import {
+  Button, Col, Layout, Row,
+} from 'antd';
 
 import './App.css';
 import { Link } from 'react-router-dom';
+import { actions } from './state-management';
 import Logo from './assets/images/logo.png';
 
 const { Header, Content } = Layout;
 
-export default connect(({ loading, auth }) => ({ loading, auth }))(
-  ({ children, auth }) => (
+export default connect(({ loading, auth }) => ({ loading, auth }), {
+  logout: actions.logout,
+})(
+  ({ children, auth, logout }) => (
     <>
       <Layout className="layout">
         {
@@ -24,7 +29,11 @@ export default connect(({ loading, auth }) => ({ loading, auth }))(
                 <Link className='menuHeaderItem' to={'/tours'}>Tours</Link>
                 <Link className='menuHeaderItem' to={'/transfers'}>Transfers</Link>
               </Col>
-              <Col span={2} offset={2}>Hello</Col>
+              <Col span={2} offset={7}>
+                <Button onClick={async() => { await logout(); }} type="primary" danger>
+                Logout
+              </Button>
+              </Col>
             </Row>
           </Header>
         }

@@ -48,7 +48,6 @@ export const logout = () => async(dispatch) => {
   await api.logout();
   localStorage.removeItem('token');
   functions.setAuthorizationToken();
-
   dispatch({
     type: LOGOUT,
   });
