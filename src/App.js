@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import {
   Button, Col, Layout, Row,
 } from 'antd';
-
 import './App.css';
 import { Link } from 'react-router-dom';
 import { actions } from './state-management';
@@ -16,27 +15,34 @@ export default connect(({ loading, auth }) => ({ loading, auth }), {
 })(
   ({ children, auth, logout }) => (
     <>
-      <Layout className="layout">
-        {
-          auth.isLoggedIn
-          && <Header>
-            <Row>
-              <Col span={5}>
-                <img src={Logo} alt="Logo" width="200" height="40" title="TouristUA"/>
-              </Col>
-              <Col span={10} className='menuHeader'>
-                <Link className='menuHeaderItem' to={'/hotels'}>Hotels</Link>
-                <Link className='menuHeaderItem' to={'/tours'}>Tours</Link>
-                <Link className='menuHeaderItem' to={'/transfers'}>Transfers</Link>
-              </Col>
-              <Col span={2} offset={7}>
-                <Button onClick={async() => { await logout(); }} type="primary" danger>
+      <Layout className="layout"> <Header>
+        <Row>
+          <Col span={5}>
+            <img src={Logo} alt="Logo" width="200" height="40" title="TouristUA"/>
+          </Col>
+          <Col span={10} className='menuHeader'>
+            <Link className='menuHeaderItem' to={'/hotels'}>Hotels</Link>
+            <Link className='menuHeaderItem' to={'/tours'}>Tours</Link>
+            <Link className='menuHeaderItem' to={'/transfers'}>Transfers</Link>
+          </Col>
+
+          {
+            auth.isLoggedIn
+              ? <Col span={2} offset={7}> <Button onClick={async() => {
+                await logout();
+              }} type="primary" danger>
                 Logout
               </Button>
+              </Col> : <Col span={5} offset={4}>
+                <Button href={'/login'} type="primary" primary>
+                  Login
+                </Button> && <Button href={'/registration'} type="primary" primary>
+                Registration
+              </Button>
               </Col>
-            </Row>
-          </Header>
-        }
+          }
+        </Row>
+      </Header>
         {
           !auth.isLoggedIn ? (
             <Content className="App-content">{children}</Content>
