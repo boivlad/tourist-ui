@@ -3,10 +3,11 @@ import {
   BrowserRouter as Router, Redirect, Route, Switch,
 } from 'react-router-dom';
 import App from '../App';
-import { Login, NotFound, Registration } from '../pages';
 // import PrivateRouter from './PrivateRoute';
-import Hotels from '../pages/Hotels';
-import Tours from '../pages/Tours';
+import {
+  Hotel, HotelsList, Login, NotFound, Registration, Tour, TourList,
+} from '../pages';
+
 
 const AppRouter = () => (
   <Router>
@@ -14,11 +15,17 @@ const AppRouter = () => (
       <Switch>
         <Route exact path="/login" component={Login}/>
         <Route exact path="/registration" component={Registration}/>
-        <Route exact path="/hotels" component={Hotels}/>
-        <Route exact path="/tours" component={Tours}/>
+        <Route path="/hotels">
+          <Route exact path="/hotels" component={HotelsList}/>
+          <Route path="/hotels/:id" component={Hotel}/>
+        </Route>
+        <Route path="/tours">
+           <Route exact path="/tours" component={TourList}/>
+          <Route path="/tours/:id" component={Tour}/>
+        </Route>
         {/* <PrivateRouter exact path="/admin" component={AdminPanel} redirect="/login"/> */}
         <Redirect exact from='/' to="/hotels"/>
-        <Route path="" component={NotFound}/>
+        <Route path="*" component={NotFound}/>
       </Switch>
     </App>
   </Router>

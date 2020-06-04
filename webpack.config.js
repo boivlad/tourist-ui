@@ -34,9 +34,12 @@ module.exports = {
       },
     ],
   },
+  output: {
+    publicPath: '/', // For URL parameters
+  },
   devServer: {
     historyApiFallback: true,
-    port: 3000
+    port: 3000,
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -45,6 +48,6 @@ module.exports = {
   ],
   performance: {
     maxEntrypointSize: 5000000,
-    maxAssetSize: 5000000
-  }
+    maxAssetSize: 5000000,
+  },
 };

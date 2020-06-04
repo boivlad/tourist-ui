@@ -34,24 +34,18 @@ export default connect(({ loading, auth }) => ({ loading, auth }), {
                 Logout
               </Button>
               </Col> : <Col span={5} offset={4}>
-                <Button href={'/login'} type="primary" primary>
+                <Button href={'/login'} type="primary">
                   Login
-                </Button> && <Button href={'/registration'} type="primary" primary>
+                </Button> && <Button href={'/registration'} type="primary">
                 Registration
               </Button>
               </Col>
           }
         </Row>
       </Header>
-        {
-          !auth.isLoggedIn ? (
-            <Content className="App-content">{children}</Content>
-          ) : (
-            <Content style={{ padding: '0 50px' }}>
-              <div className="site-layout-content">{children}</div>
-            </Content>
-          )
-        }
+        <Content className="App-content">
+          <div className="site-layout-content">{children}</div>
+        </Content>
       </Layout>
     </>
   ),

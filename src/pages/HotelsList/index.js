@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { List, Rate } from 'antd';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { actions } from '../../../state-management';
-import api from '../../../utils/api';
+import { actions } from '../../state-management';
+import api from '../../utils/api';
 
 class HotelsList extends Component {
   async componentDidMount() {

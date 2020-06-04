@@ -2,17 +2,16 @@ import React, { Component } from 'react';
 import { List, Rate } from 'antd';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { actions } from '../../../state-management';
-import api from '../../../utils/api';
+import { actions } from '../../state-management';
+import api from '../../utils/api';
 
-class ToursList extends Component {
+class TourList extends Component {
   async componentDidMount() {
     await this.props.getTours();
   }
 
   render() {
     const tours = this.props.tourList;
-    console.log(tours);
     return (
       <div>
         {
@@ -55,4 +54,4 @@ export default connect(({ auth, tours }) => ({
   tourList: tours.tours,
 }), {
   getTours: actions.getTours,
-})(ToursList);
+})(TourList);
