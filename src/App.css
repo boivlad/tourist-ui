@@ -45,7 +45,19 @@ section {
 .formButton {
   width: 100%;
 }
-
+.priceLabel {
+  margin-right: 30px;
+  background: green;
+  border-radius: 10px;
+  color: white;
+  padding: 10px 15px;
+}
+.serviceItemPreview {
+  box-shadow: 0px 1px 20px 0px black;
+}
+.serviceItemTitle a {
+  margin-right: 30px;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

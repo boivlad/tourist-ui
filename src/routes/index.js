@@ -6,6 +6,7 @@ import App from '../App';
 import { Login, NotFound, Registration } from '../pages';
 // import PrivateRouter from './PrivateRoute';
 import Hotels from '../pages/Hotels';
+import Tours from '../pages/Tours';
 
 const AppRouter = () => (
   <Router>
@@ -14,6 +15,7 @@ const AppRouter = () => (
         <Route exact path="/login" component={Login}/>
         <Route exact path="/registration" component={Registration}/>
         <Route exact path="/hotels" component={Hotels}/>
+        <Route exact path="/tours" component={Tours}/>
         {/* <PrivateRouter exact path="/admin" component={AdminPanel} redirect="/login"/> */}
         <Redirect exact from='/' to="/hotels"/>
         <Route path="" component={NotFound}/>

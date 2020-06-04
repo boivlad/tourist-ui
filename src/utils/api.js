@@ -8,6 +8,7 @@ const urls = {
   registrationManager: `${host}${apiPath}/admin`,
   logout: `${host}${apiPath}/user`,
   hotels: `${host}${apiPath}/hotels`,
+  tours: `${host}${apiPath}/tours`,
 };
 
 // let cache = {};
@@ -44,6 +45,10 @@ const serviceInfo = {
   getHotels: serverRequest({
     method: 'GET',
     url: urls.hotels,
+  }),
+  getTours: serverRequest({
+    method: 'GET',
+    url: urls.tours,
   }),
 };
 const auth = {

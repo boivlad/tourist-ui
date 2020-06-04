@@ -5,13 +5,14 @@ import { connect } from 'react-redux';
 import { actions } from '../../../state-management';
 import api from '../../../utils/api';
 
-class HotelsList extends Component {
+class ToursList extends Component {
   async componentDidMount() {
-    await this.props.getHotels();
+    await this.props.getTours();
   }
 
   render() {
-    const hotels = this.props.hotelList;
+    const tours = this.props.tourList;
+    console.log(tours);
     return (
       <div>
         {
@@ -21,7 +22,7 @@ class HotelsList extends Component {
             pagination={{
               pageSize: 4,
             }}
-            dataSource={hotels}
+            dataSource={tours}
             renderItem={(item) => (
               <List.Item
                 key={item.title}
@@ -36,8 +37,8 @@ class HotelsList extends Component {
                 }
               >
                 <List.Item.Meta
-                  title={<div className="serviceItemTitle"><Link to={`/hotels/${item.id}`}><span>{item.title}</span></Link><Rate disabled defaultValue={item.rating} /></div>}
-                  description={`${item.country}, ${item.city}, ${item.street}`}
+                  title={<div className="serviceItemTitle"><Link to={`/tours/${item.id}`}>{item.title}</Link><span className="priceLabel">{`${item.price}грн.`}</span> <Rate disabled defaultValue={item.rating}/></div>}
+                  description={`${item.country}, ${item.city}`}
                 />
                 {item.description}
               </List.Item>
@@ -49,9 +50,9 @@ class HotelsList extends Component {
   }
 }
 
-export default connect(({ auth, hotels }) => ({
+export default connect(({ auth, tours }) => ({
   isLoggedIn: auth.isLoggedIn,
-  hotelList: hotels.hotels,
+  tourList: tours.tours,
 }), {
-  getHotels: actions.getHotels,
-})(HotelsList);
+  getTours: actions.getTours,
+})(ToursList);
