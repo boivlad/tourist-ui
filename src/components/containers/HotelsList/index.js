@@ -3,6 +3,7 @@ import { List } from 'antd';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { actions } from '../../../state-management';
+import api from '../../../utils/api';
 
 class HotelsList extends Component {
   async componentDidMount() {
@@ -27,8 +28,9 @@ class HotelsList extends Component {
                 extra={
                   <img
                     width={272}
+                    height={168}
                     alt="logo"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                    src={`${api.hostPath}uploads/images/${item.preview}`}
                   />
                 }
               >

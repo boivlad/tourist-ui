@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-const host = 'http://localhost:8080/api/v1';
-
+const host = 'http://localhost:8080/';
+const apiPath = 'api/v1';
 const urls = {
-  login: `${host}/auth`,
-  registration: `${host}/user`,
-  registrationManager: `${host}/admin`,
-  logout: `${host}/user`,
-  hotels: `${host}/hotels`,
+  login: `${host}${apiPath}/auth`,
+  registration: `${host}${apiPath}/user`,
+  registrationManager: `${host}${apiPath}/admin`,
+  logout: `${host}${apiPath}/user`,
+  hotels: `${host}${apiPath}/hotels`,
 };
 
 // let cache = {};
@@ -82,4 +82,5 @@ const auth = {
 export default {
   ...auth,
   ...serviceInfo,
+  hostPath: host,
 };
