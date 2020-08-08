@@ -5,7 +5,7 @@ import {
 import App from '../App';
 // import PrivateRouter from './PrivateRoute';
 import {
-  Hotel, HotelsList, Login, NotFound, Registration, Tour, TourList,
+  Hotel, HotelsList, Login, NotFound, Registration, Tour, TourList, Transfer, TransferList,
 } from '../pages';
 
 
@@ -22,6 +22,9 @@ const AppRouter = () => (
         <Route path="/tours">
            <Route exact path="/tours" component={TourList}/>
           <Route path="/tours/:id" component={Tour}/>
+        </Route><Route path="/transfers">
+           <Route exact path="/transfers" component={TransferList}/>
+          <Route path="/transfers/:id" component={Transfer}/>
         </Route>
         {/* <PrivateRouter exact path="/admin" component={AdminPanel} redirect="/login"/> */}
         <Redirect exact from='/' to="/hotels"/>

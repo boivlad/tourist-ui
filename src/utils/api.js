@@ -9,23 +9,8 @@ const urls = {
   logout: `${host}${apiPath}/user`,
   hotels: `${host}${apiPath}/hotels`,
   tours: `${host}${apiPath}/tours`,
+  transfers: `${host}${apiPath}/transfers`,
 };
-
-// let cache = {};
-
-// const callThenWait = (fn, time) => {
-//   let timer;
-//   return async (data) => {
-//     if (!timer) {
-//       timer = setTimeout(() => {
-//         clearTimeout(timer);
-//         timer = undefined;
-//       }, time);
-//       cache = await fn(data);
-//     }
-//     return cache;
-//   }
-// };
 
 const serverRequest = (config) => async({ data = false, params = false } = {
   data: false,
@@ -49,6 +34,10 @@ const serviceInfo = {
   getTours: serverRequest({
     method: 'GET',
     url: urls.tours,
+  }),
+  getTransfers: serverRequest({
+    method: 'GET',
+    url: urls.transfers,
   }),
 };
 const auth = {
