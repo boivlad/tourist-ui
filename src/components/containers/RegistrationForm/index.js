@@ -23,7 +23,7 @@ class RegistrationForm extends Component {
 
   onFinish(values) {
     Object.assign(values, {
-      dateOfBirth: values.dateOfBirth._i,
+      dateOfBirth: values.dateOfBirth,
       password: encryptData(values.password),
       confirm: undefined,
     });
