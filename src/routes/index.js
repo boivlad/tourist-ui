@@ -8,7 +8,6 @@ import {
   Hotel, HotelsList, Login, NotFound, Registration, Tour, TourList, Transfer, TransferList,
 } from '../pages';
 
-
 const AppRouter = () => (
   <Router>
     <App>
