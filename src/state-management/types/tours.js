@@ -1,1 +1,2 @@
-export const GET_TOURS = 'TOURS_ACTION::GET_TOURS';
+export const GET_ALL_TOURS = 'TOURS_ACTION::GET_ALL_TOURS';
+export const GET_TOUR = 'TOURS_ACTION::GET_TOUR';

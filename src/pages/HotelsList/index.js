@@ -36,7 +36,11 @@ class HotelsList extends Component {
                 }
               >
                 <List.Item.Meta
-                  title={<div className="serviceItemTitle"><Link to={`/hotels/${item.id}`}><span>{item.title}</span></Link><Rate disabled defaultValue={item.rating} /></div>}
+                  title={
+                    <div className="serviceItemTitle">
+                      <Link to={`/hotels/${item.id}`}><span>{item.title}</span></Link>
+                      <Rate disabled defaultValue={item.rating} />
+                    </div>}
                   description={`${item.country}, ${item.city}, ${item.street}`}
                 />
                 {item.description}

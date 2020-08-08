@@ -1,18 +1,25 @@
-import { GET_TRANSFERS } from '../types';
+import { GET_ALL_TRANSFERS, GET_TRANSFER } from '../types';
 
 const initialState = {
   transfers: [],
+  currentTransfer: null,
 };
 
-const handleGetTransfers = (transfers) => ({
+const handleGetAllTransfers = (state, transfers) => ({
+  ...state,
   transfers,
+});
+const handleGetTransfer = (state, currentTransfer) => ({
+  ...state,
+  currentTransfer,
 });
 
 const handlers = {
-  [GET_TRANSFERS]: handleGetTransfers,
+  [GET_ALL_TRANSFERS]: handleGetAllTransfers,
+  [GET_TRANSFER]: handleGetTransfer,
 };
 
 export default (state = initialState, action) => {
   const handler = handlers[action.type];
-  return handler ? handler(action.payload) : state;
+  return handler ? handler(state, action.payload) : state;
 };

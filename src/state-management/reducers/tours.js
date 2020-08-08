@@ -1,18 +1,25 @@
-import { GET_TOURS } from '../types';
+import { GET_ALL_TOURS, GET_TOUR } from '../types';
 
 const initialState = {
   tours: [],
+  currentTour: null,
 };
 
-const handleGetTours = (tours) => ({
+const handleGetAllTours = (state, tours) => ({
+  ...state,
   tours,
+});
+const handleGetTour = (state, currentTour) => ({
+  ...state,
+  currentTour,
 });
 
 const handlers = {
-  [GET_TOURS]: handleGetTours,
+  [GET_ALL_TOURS]: handleGetAllTours,
+  [GET_TOUR]: handleGetTour,
 };
 
 export default (state = initialState, action) => {
   const handler = handlers[action.type];
-  return handler ? handler(action.payload) : state;
+  return handler ? handler(state, action.payload) : state;
 };

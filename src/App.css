@@ -48,11 +48,12 @@ section {
   width: 100%;
 }
 .priceLabel {
-  margin-right: 30px;
+  display: inline-block;
   background: green;
   border-radius: 10px;
-  color: white;
+  color: white !important;
   padding: 10px 15px;
+
 }
 .serviceItemPreview {
   box-shadow: 0px 1px 20px 0px black;

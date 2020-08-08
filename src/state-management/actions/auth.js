@@ -11,26 +11,34 @@ export const login = (username) => (dispatch) => {
   });
 };
 export const registrationRequest = (userData) => async(dispatch) => {
-  const response = await api.registration(userData);
-  if (response.status === 201) {
-    message.success(response.data.message);
-    dispatch({
-      type: REGISTRATION,
-    });
-  } else {
-    message.error(response.data.message);
+  try {
+    const response = await api.registration(userData);
+    if (response.status === 201) {
+      message.success(response.data.message);
+      dispatch({
+        type: REGISTRATION,
+      });
+    } else {
+      message.error(response.data.message);
+    }
+  } catch (e) {
+    message.error(e.response.data.message);
   }
 };
 
 export const registrationManagerRequest = (userData) => async(dispatch) => {
-  const response = await api.registrationManager(userData);
-  if (response.status === 201) {
-    message.success(response.data.message);
-    dispatch({
-      type: REGISTRATION_MANAGER,
-    });
-  } else {
-    message.error(response.data.message);
+  try {
+    const response = await api.registrationManager(userData);
+    if (response.status === 201) {
+      message.success(response.data.message);
+      dispatch({
+        type: REGISTRATION_MANAGER,
+      });
+    } else {
+      message.error(response.data.message);
+    }
+  } catch (e) {
+    message.error(e.response.data.message);
   }
 };
 

@@ -2,76 +2,40 @@ import axios from 'axios';
 
 const host = 'http://localhost:8080/';
 const apiPath = 'api/v1';
+const apiBaseURL = `${host}${apiPath}`;
 const urls = {
-  login: `${host}${apiPath}/auth`,
-  registration: `${host}${apiPath}/user`,
-  registrationManager: `${host}${apiPath}/admin`,
-  logout: `${host}${apiPath}/user`,
-  hotels: `${host}${apiPath}/hotels`,
-  tours: `${host}${apiPath}/tours`,
-  transfers: `${host}${apiPath}/transfers`,
+  login: `${apiBaseURL}/auth`,
+  registration: `${apiBaseURL}/user`,
+  registrationManager: `${apiBaseURL}/admin`,
+  logout: `${apiBaseURL}/user`,
+  hotels: `${apiBaseURL}/hotels`,
+  tours: `${apiBaseURL}/tours`,
+  transfers: `${apiBaseURL}/transfers`,
 };
+const instance = axios.create({
+  baseURL: apiBaseURL,
+});
 
-const serverRequest = (config) => async({ data = false, params = false } = {
-  data: false,
-  params: false,
-}) => {
-  try {
-    return await axios({
-      ...config,
-      data: data || undefined,
-      params: params || undefined,
-    });
-  } catch (e) {
-    return e.response;
-  }
-};
 const serviceInfo = {
-  getHotels: serverRequest({
-    method: 'GET',
-    url: urls.hotels,
-  }),
-  getTours: serverRequest({
-    method: 'GET',
-    url: urls.tours,
-  }),
-  getTransfers: serverRequest({
-    method: 'GET',
-    url: urls.transfers,
-  }),
+  getHotels: () => instance.get(`${urls.hotels}`),
+  getTours: () => instance.get(`${urls.tours}`),
+  getTourById: (id) => instance.get(`${urls.tours}/${id}`),
+  getTransfers: () => instance.get(`${urls.transfers}`),
+  getTransferById: (id) => instance.get(`${urls.transfers}/${id}`),
 };
 const auth = {
-  login: (name, password) => {
-    const sendRequest = serverRequest({
-      method: 'POST',
-      url: urls.login,
-    });
-    const data = {
-      userName: name,
-      password,
-    };
-    return sendRequest({ data });
-  },
-  registration: (data) => {
-    const sendRequest = serverRequest({
-      method: 'POST',
-      url: urls.registration,
-    });
-    return sendRequest({ data });
-  },
-  registrationManager: (data) => {
-    const sendRequest = serverRequest({
-      method: 'POST',
-      url: urls.registrationManager,
-    });
-    return sendRequest({ data });
-  },
-  logout: serverRequest({
-    method: 'delete',
-    url: urls.logout,
+  login: (name, password) => instance.post(urls.login, {
+    userName: name,
+    password,
   }),
+  registration: (data) => instance.post(urls.registration, {
+    data,
+  }),
+  registrationManager: (data) => instance.post(urls.registrationManager, {
+    data,
+  }),
+  logout: () => instance.delete(urls.logout),
 };
-
 
 export default {
   ...auth,

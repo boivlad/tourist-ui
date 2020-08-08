@@ -38,7 +38,7 @@ class TransferList extends Component {
                 <List.Item.Meta
                   title={<div className="serviceItemTitle">
                     <Link to={`/transfers/${item.id}`}>{item.title}</Link>
-                    <span className="priceLabel">{`${item.price}грн.`}</span>
+                    <span className="priceLabel">${item.price}</span>
                     <Rate disabled defaultValue={item.rating}/>
                   </div>}
                   description={`${item.country}, ${item.city}`}

@@ -1,15 +1,33 @@
 import { message } from 'antd';
-import { GET_TRANSFERS } from '../types';
+import { GET_ALL_TRANSFERS, GET_TRANSFER } from '../types';
 import { api } from '../../utils';
 
 export const getTransfers = () => async(dispatch) => {
+  message.loading('Loading transfers list...', 0);
   const response = await api.getTransfers();
+  message.destroy();
   if (response.status === 200) {
     dispatch({
-      type: GET_TRANSFERS,
+      type: GET_ALL_TRANSFERS,
       payload: response.data.transfers,
     });
   } else {
     message.error(response.data.message);
+  }
+};
+export const getTransferById = (id) => async(dispatch) => {
+  message.loading('Loading transfer info...', 0);
+  try {
+    const response = await api.getTransferById(id);
+    if (response.status === 200) {
+      dispatch({
+        type: GET_TRANSFER,
+        payload: response.data.transfer,
+      });
+    }
+  } catch (e) {
+    message.error(e.response.data.message);
+  } finally {
+    message.destroy();
   }
 };
