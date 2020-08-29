@@ -18,6 +18,7 @@ const instance = axios.create({
 
 const serviceInfo = {
   getHotels: () => instance.get(`${urls.hotels}`),
+  getHotelById: (id) => instance.get(`${urls.hotels}/${id}`),
   getTours: () => instance.get(`${urls.tours}`),
   getTourById: (id) => instance.get(`${urls.tours}/${id}`),
   getTransfers: () => instance.get(`${urls.transfers}`),
