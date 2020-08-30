@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getTokenForHeader } from './functions';
 
 const host = 'http://localhost:8080/';
 const apiPath = 'api/v1';
@@ -19,6 +20,10 @@ const instance = axios.create({
 const serviceInfo = {
   getHotels: () => instance.get(`${urls.hotels}`),
   getHotelById: (id) => instance.get(`${urls.hotels}/${id}`),
+  getRoomsByHotel: (id) => instance.get(`${urls.hotels}/${id}/rooms`),
+  orderRoom: (data) => instance.post(`${urls.hotels}/room/order`, { data }, {
+    headers: { Authorization: getTokenForHeader() },
+  }),
   getTours: () => instance.get(`${urls.tours}`),
   getTourById: (id) => instance.get(`${urls.tours}/${id}`),
   getTransfers: () => instance.get(`${urls.transfers}`),

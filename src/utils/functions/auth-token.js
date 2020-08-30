@@ -7,3 +7,5 @@ export const setAuthorizationToken = (token) => {
     delete axios.defaults.headers.common.Authorization;
   }
 };
+export const getCurrentToken = () => localStorage.getItem('token');
+export const getTokenForHeader = () => `Bearer ${getCurrentToken()}`;

@@ -1,4 +1,4 @@
-import { GET_ALL_HOTELS, GET_HOTEL } from '../types';
+import { GET_ALL_HOTEL_ROOMS, GET_ALL_HOTELS, GET_HOTEL } from '../types';
 
 const initialState = {
   hotels: [],
@@ -9,13 +9,18 @@ const handleGetHotels = (state, hotels) => ({
   ...state,
   hotels,
 });
-const handleGetTour = (state, currentHotel) => ({
+const handleGetHotel = (state, currentHotel) => ({
   ...state,
   currentHotel,
 });
+const handleGetHotelRooms = (state, rooms) => ({
+  ...state,
+  currentHotel: { ...state.currentHotel, rooms },
+});
 const handlers = {
   [GET_ALL_HOTELS]: handleGetHotels,
-  [GET_HOTEL]: handleGetTour,
+  [GET_HOTEL]: handleGetHotel,
+  [GET_ALL_HOTEL_ROOMS]: handleGetHotelRooms,
 };
 
 export default (state = initialState, action) => {
