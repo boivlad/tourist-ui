@@ -19,6 +19,7 @@ class Tours extends Component {
     super(props);
     this.state = {
       orderModal: false,
+      selectedTour: null,
     };
     this.openReserveModal = this.openReserveModal.bind(this);
     this.requestReserve = this.requestReserve.bind(this);
@@ -31,7 +32,7 @@ class Tours extends Component {
   openReserveModal() {
     this.setState({
       orderModal: true,
-      selectedRoom: {
+      selectedTour: {
         id: this.props.tourData.id,
         maxPlaces: 100,
         defaultPrice: this.props.tourData.price,
@@ -90,7 +91,7 @@ class Tours extends Component {
         )}
         {this.state.orderModal && (
           <OrderModal
-            item={this.state.selectedRoom}
+            item={this.state.selectedTour}
             close={() => this.setState({ orderModal: false })}
             onFinish={this.requestReserve}/>
 

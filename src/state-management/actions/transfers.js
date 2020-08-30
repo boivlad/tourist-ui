@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import { GET_ALL_TRANSFERS, GET_TRANSFER } from '../types';
+import { GET_ALL_TRANSFERS, GET_TRANSFER, ORDER_TRANSFER } from '../types';
 import { api } from '../../utils';
 
 export const getTransfers = () => async(dispatch) => {
@@ -29,5 +29,19 @@ export const getTransferById = (id) => async(dispatch) => {
     message.error(e.response.data.message);
   } finally {
     message.destroy();
+  }
+};
+export const orderTransfer = (data) => async(dispatch) => {
+  message.loading('Ordering transfer...', 0);
+  try {
+    const response = await api.orderTransfer(data);
+    if (response.status === 201) {
+      dispatch({ type: ORDER_TRANSFER });
+      message.destroy();
+      message.success(response.data.message);
+    }
+  } catch (e) {
+    message.destroy();
+    message.error(e.response.data.message);
   }
 };

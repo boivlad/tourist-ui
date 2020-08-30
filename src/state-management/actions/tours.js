@@ -1,6 +1,6 @@
 import { message } from 'antd';
 import {
-  GET_ALL_TOURS, GET_TOUR, ORDER_ROOM, ORDER_TOUR,
+  GET_ALL_TOURS, GET_TOUR, ORDER_TOUR,
 } from '../types';
 import { api } from '../../utils';
 
@@ -32,7 +32,7 @@ export const getTourById = (id) => async(dispatch) => {
   }
 };
 export const orderTour = (data) => async(dispatch) => {
-  message.loading('Ordering room...', 0);
+  message.loading('Ordering tour...', 0);
   try {
     const response = await api.orderTour(data);
     if (response.status === 201) {

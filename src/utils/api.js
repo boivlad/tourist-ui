@@ -31,6 +31,9 @@ const serviceInfo = {
   }),
   getTransfers: () => instance.get(`${urls.transfers}`),
   getTransferById: (id) => instance.get(`${urls.transfers}/${id}`),
+  orderTransfer: (data) => instance.post(`${urls.transfers}/order`, { data }, {
+    headers: { Authorization: getTokenForHeader() },
+  }),
 };
 const auth = {
   login: (name, password) => instance.post(urls.login, {
