@@ -26,6 +26,9 @@ const serviceInfo = {
   }),
   getTours: () => instance.get(`${urls.tours}`),
   getTourById: (id) => instance.get(`${urls.tours}/${id}`),
+  orderTour: (data) => instance.post(`${urls.tours}/order`, { data }, {
+    headers: { Authorization: getTokenForHeader() },
+  }),
   getTransfers: () => instance.get(`${urls.transfers}`),
   getTransferById: (id) => instance.get(`${urls.transfers}/${id}`),
 };

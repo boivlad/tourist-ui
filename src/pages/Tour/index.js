@@ -6,6 +6,7 @@ import {
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { actions } from '../../state-management';
 import api from '../../utils/api';
+import { OrderModal } from '../../components/presentations';
 
 const { Text, Title } = Typography;
 const imageStyles = {
@@ -14,8 +15,32 @@ const imageStyles = {
 };
 
 class Tours extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      orderModal: false,
+    };
+    this.openReserveModal = this.openReserveModal.bind(this);
+    this.requestReserve = this.requestReserve.bind(this);
+  }
+
   async componentDidMount() {
     await this.props.getTour(this.props.match.params.id);
+  }
+
+  openReserveModal() {
+    this.setState({
+      orderModal: true,
+      selectedRoom: {
+        id: this.props.tourData.id,
+        maxPlaces: 100,
+        defaultPrice: this.props.tourData.price,
+      },
+    });
+  }
+
+  requestReserve(data) {
+    this.props.orderTour({ ...data, tourId: this.props.tourData.id });
   }
 
   render() {
@@ -32,11 +57,10 @@ class Tours extends Component {
             </Row>
             <Row gutter={[24, 24]}>
               <Col> <Text className="priceLabel" strong>${item.price}</Text></Col>
-              {this.props.isLoggedIn && (
-                <Col span={3}><Button type="primary" shape="round" icon={<ShoppingCartOutlined/>}
+                <Col span={3}><Button disabled={!this.props.isLoggedIn} type="primary" shape="round" onClick={this.openReserveModal} icon={<ShoppingCartOutlined/>}
                                       size={'large'}>
-                  To order
-                </Button></Col>)}
+                  To reserve
+                </Button></Col>
 
             </Row>
             <Row gutter={[24, 24]}>
@@ -62,8 +86,14 @@ class Tours extends Component {
                 </Typography.Paragraph>
               </Col>
             </Row>
-
           </>
+        )}
+        {this.state.orderModal && (
+          <OrderModal
+            item={this.state.selectedRoom}
+            close={() => this.setState({ orderModal: false })}
+            onFinish={this.requestReserve}/>
+
         )}
       </div>
     );
@@ -75,4 +105,5 @@ export default connect(({ auth, tours }) => ({
   tourData: tours.currentTour,
 }), {
   getTour: actions.getTourById,
+  orderTour: actions.orderTour,
 })(Tours);

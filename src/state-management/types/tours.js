@@ -1,2 +1,3 @@
 export const GET_ALL_TOURS = 'TOURS_ACTION::GET_ALL_TOURS';
 export const GET_TOUR = 'TOURS_ACTION::GET_TOUR';
+export const ORDER_TOUR = 'TOURS_ACTION::ORDER_TOUR';
