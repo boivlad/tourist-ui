@@ -58,11 +58,10 @@ class Transfer extends Component {
             </Row>
             <Row gutter={[24, 24]}>
               <Col> <Text className="priceLabel" strong>${item.price}</Text></Col>
-              {this.props.isLoggedIn && (
                 <Col span={3}><Button disabled={!this.props.isLoggedIn} type="primary" shape="round" onClick={this.openReserveModal} icon={<ShoppingCartOutlined/>}
                                       size={'large'}>
                   To order
-                </Button></Col>)}
+                </Button></Col>
 
             </Row>
             <Row gutter={[24, 24]}>
